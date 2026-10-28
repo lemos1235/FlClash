@@ -961,9 +961,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "inputRuleContent": MessageLookupByLibrary.simpleMessage(
       "Enter the rule content",
     ),
-    "installedAppsPermissionDeniedMessage": MessageLookupByLibrary.simpleMessage(
-      "The app list permission was denied, so installed apps cannot be listed. Please grant it manually in system settings.",
-    ),
+    "installedAppsPermissionDeniedMessage":
+        MessageLookupByLibrary.simpleMessage(
+          "The app list permission was denied, so installed apps cannot be listed. Please grant it manually in system settings.",
+        ),
     "installedAppsPermissionDesc": MessageLookupByLibrary.simpleMessage(
       "This system hides the installed app list until the permission is granted. Authorize it to configure the per-app proxy.",
     ),
@@ -1380,6 +1381,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Groups show up here once the core starts",
     ),
     "proxyGroupsCount": m71,
+    "proxyMode": MessageLookupByLibrary.simpleMessage("Proxy mode"),
     "proxyProviders": MessageLookupByLibrary.simpleMessage("Proxy providers"),
     "proxyType": MessageLookupByLibrary.simpleMessage("Proxy type"),
     "pruneCache": MessageLookupByLibrary.simpleMessage("Prune cache"),
@@ -1693,6 +1695,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "serviceUnsupportedRegion": MessageLookupByLibrary.simpleMessage(
       "Region not supported",
     ),
+    "setAsSystemProxy": MessageLookupByLibrary.simpleMessage(
+      "Set as system proxy",
+    ),
     "settingEntries": MessageLookupByLibrary.simpleMessage("settings"),
     "settings": MessageLookupByLibrary.simpleMessage("Settings"),
     "settingsCount": m77,
@@ -1710,6 +1715,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Stop button in notification",
     ),
     "showPassword": MessageLookupByLibrary.simpleMessage("Show password"),
+    "showSpeedStatistics": MessageLookupByLibrary.simpleMessage(
+      "Show speed statistics",
+    ),
     "sidebar": MessageLookupByLibrary.simpleMessage("Sidebar"),
     "sidebarBlurDesc": MessageLookupByLibrary.simpleMessage(
       "Background blur lets the desktop behind the window show through the sidebar.",

@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:collection/collection.dart';
 import 'package:fl_clash/common/common.dart';
 import 'package:fl_clash/common/tray.dart';
 import 'package:fl_clash/common/window.dart';
@@ -41,11 +40,6 @@ class _TrayManagerState extends ConsumerState<TrayManager> {
       }
     });
     if (system.isMacOS) {
-      ref.listenManual(trayDelaysProvider, (prev, next) {
-        if (!const DeepCollectionEquality().equals(prev, next)) {
-          _requestUpdate();
-        }
-      });
       ref.listenManual(trayTitleStateProvider, (prev, next) {
         if (prev != next) {
           _reportFailure(
@@ -59,7 +53,6 @@ class _TrayManagerState extends ConsumerState<TrayManager> {
     }
   }
 
-  /// A delay test changes the menu per proxy, so updates in flight coalesce.
   void _requestUpdate() {
     if (_isUpdating) {
       _hasPendingUpdate = true;

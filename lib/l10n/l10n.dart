@@ -7943,8 +7943,7 @@ class AppLocalizations {
   String customImportDroppedSubRules(num count, Object label) {
     return Intl.plural(
       count,
-      one:
-          '1 SUB-RULE rule was dropped, since custom profiles do not support sub-rules',
+      one: '1 SUB-RULE rule was dropped, since custom profiles do not support sub-rules',
       other:
           '$label SUB-RULE rules were dropped, since custom profiles do not support sub-rules',
       name: 'customImportDroppedSubRules',
@@ -8050,6 +8049,31 @@ class AppLocalizations {
       name: 'alreadyInLocalProxies',
       desc: '',
       args: [name],
+    );
+  }
+
+  /// `Proxy mode`
+  String get proxyMode {
+    return Intl.message('Proxy mode', name: 'proxyMode', desc: '', args: []);
+  }
+
+  /// `Set as system proxy`
+  String get setAsSystemProxy {
+    return Intl.message(
+      'Set as system proxy',
+      name: 'setAsSystemProxy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Show speed statistics`
+  String get showSpeedStatistics {
+    return Intl.message(
+      'Show speed statistics',
+      name: 'showSpeedStatistics',
+      desc: '',
+      args: [],
     );
   }
 }

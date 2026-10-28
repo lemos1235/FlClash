@@ -135,6 +135,7 @@ from `assets/images/icon.png`. `status_1`–`status_3` are the logo glyph alone 
 apart only by color, so they carry no rings or shadow. macOS draws its menu bar icon as a template by default,
 where color is lost: `status_1` renders the bare logo from `assets_source/images/icon/glyph.svg` and `status_4`
 reuses `status_4.svg`, both recolored to black into `assets/images/tray/macos/`; the sources keep their colors.
+`status_0` is that glyph at 45% opacity, shown until TUN or the system proxy routes traffic.
 With the tray menu's monochrome icon turned off, macOS loads the color PNGs from `assets/images/tray/unix/`.
 `glyph.svg` is also the geometry of the Android notification drawables
 `android/service/src/main/res/drawable/ic.xml` and `ic_service.xml`; change them together. `pubspec.yaml` declares the three tray directories with `platforms:` so each

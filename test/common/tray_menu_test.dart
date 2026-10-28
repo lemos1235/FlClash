@@ -162,28 +162,31 @@ void main() {
     },
   );
 
-  test('builds the stopped menu without the running-only toggles', () async {
-    await update(_trayState());
+  test('lays the menu out mode, groups, routing, window, exit', () async {
+    container.dispose();
+    container = ProviderContainer(
+      overrides: [selectedProxyNameProvider('Proxy').overrideWithValue('B')],
+    );
+    await update(_trayState(groups: [_proxyGroup]));
 
-    final labels = _labels(showCall());
     final l10n = currentAppLocalizations;
-    expect(labels, contains(l10n.show));
-    expect(labels, contains(l10n.start));
-    expect(labels, contains(l10n.autoLaunch));
-    expect(labels, contains(l10n.copyEnvVar));
-    expect(labels, contains(l10n.exit));
-    expect(labels, isNot(contains(l10n.tun)));
-    expect(labels, isNot(contains(l10n.systemProxy)));
-  });
-
-  test('adds TUN and system proxy toggles once the core is running', () async {
-    await update(_trayState(isStart: true));
-
-    final labels = _labels(showCall());
-    final l10n = currentAppLocalizations;
-    expect(labels, contains(l10n.stop), reason: 'start flips to stop');
-    expect(labels, contains(l10n.tun));
-    expect(labels, contains(l10n.systemProxy));
+    expect(
+      _items(showCall()).map((item) => item['label'] ?? item['type']).toList(),
+      [
+        '${l10n.proxyMode} (${Mode.rule.label})',
+        'separator',
+        'Proxy (B)',
+        'separator',
+        l10n.setAsSystemProxy,
+        l10n.tun,
+        l10n.copyEnvVar,
+        'separator',
+        l10n.dashboard,
+        l10n.showSpeedStatistics,
+        'separator',
+        l10n.exit,
+      ],
+    );
   });
 
   group('safe mode', () {
@@ -192,9 +195,8 @@ void main() {
 
       final labels = _labels(showCall());
       final l10n = currentAppLocalizations;
-      expect(labels, contains(l10n.stop));
       expect(labels, contains(l10n.tun));
-      expect(labels, contains(l10n.systemProxy));
+      expect(labels, contains(l10n.setAsSystemProxy));
       expect(labels, contains(l10n.copyEnvVar));
     });
 
@@ -215,14 +217,21 @@ void main() {
     });
   });
 
-  test('offers every outbound mode as a menu entry', () async {
+  test('offers every outbound mode in the mode submenu', () async {
     await update(_trayState(mode: Mode.global));
 
-    final checkedModes = _items(showCall())
-        .where((item) => item['checked'] == true)
-        .map((item) => item['label'])
-        .toList();
-    expect(checkedModes, contains(Intl.message(Mode.global.name)));
+    final submenu = _item(
+      showCall(),
+      '${currentAppLocalizations.proxyMode} (${Mode.global.label})',
+    );
+    final children = (submenu['items'] as List).cast<Map<Object?, Object?>>();
+    expect(children.map((item) => item['label']), [
+      for (final mode in Mode.values) mode.label,
+    ]);
+    expect(
+      children.where((item) => item['checked'] == true).map((i) => i['label']),
+      [Intl.message(Mode.global.name)],
+    );
   });
 
   test('sends icon, tooltip and menu in a single show call', () async {
@@ -254,10 +263,6 @@ void main() {
       base64Encode(
         File('assets/images/tray/unix/status_3.png').readAsBytesSync(),
       ),
-    );
-    expect(
-      _item(showCall(), currentAppLocalizations.monochromeIcon)['checked'],
-      isFalse,
     );
   });
 
@@ -295,10 +300,7 @@ void main() {
       ),
     );
 
-    final submenu = _items(
-      showCall(),
-    ).firstWhere((item) => item['type'] == 'submenu');
-    expect(submenu['label'], 'Proxy');
+    final submenu = _item(showCall(), 'Proxy');
     final children = (submenu['items'] as List).cast<Map<Object?, Object?>>();
     expect(children.map((item) => item['label']), contains('A'));
   });
@@ -320,66 +322,29 @@ void main() {
 
     final l10n = currentAppLocalizations;
     final call = showCall();
-    expect(_item(call, l10n.show)['detail'], '⌃⇧V');
-    expect(_item(call, Mode.global.label)['detail'], '⌃⇧G');
+    final modes =
+        (_item(call, '${l10n.proxyMode} (${Mode.rule.label})')['items'] as List)
+            .cast<Map<Object?, Object?>>();
+    Map<Object?, Object?> mode(Mode mode) =>
+        modes.firstWhere((item) => item['label'] == mode.label);
+    expect(_item(call, l10n.dashboard)['detail'], '⌃⇧V');
+    expect(mode(Mode.global)['detail'], '⌃⇧G');
     expect(_item(call, l10n.tun)['detail'], '⌃⇧T');
     expect(_item(call, l10n.exit), isNot(contains('detail')));
-    expect(_item(call, Mode.rule.label), isNot(contains('detail')));
+    expect(mode(Mode.rule), isNot(contains('detail')));
   });
 
-  test(
-    'group submenus show the delay of the selection and of each proxy',
-    () async {
-      container.dispose();
-      container = ProviderContainer(
-        overrides: [
-          selectedProxyNameProvider('Proxy').overrideWithValue('A'),
-          trayDelaysProvider.overrideWithValue({
-            'Proxy': {'A': 120, 'B': -1, 'C': -2},
-          }),
-        ],
-      );
-      const group = Group(
-        name: 'Proxy',
-        type: GroupType.Selector,
-        all: [
-          Proxy(name: 'A', type: 'Direct'),
-          Proxy(name: 'B', type: 'Direct'),
-          Proxy(name: 'C', type: 'Direct'),
-          Proxy(name: 'D', type: 'Direct'),
-        ],
-      );
-      await update(_trayState(groups: [group]));
-
-      final submenu = _item(showCall(), 'Proxy');
-      expect(submenu['detail'], '120');
-      final children = (submenu['items'] as List).cast<Map<Object?, Object?>>();
-      expect(children.map((item) => item['detail']), [
-        '120',
-        currentAppLocalizations.timeout,
-        currentAppLocalizations.delayFailed,
-        null,
-      ]);
-    },
-  );
-
-  test('a delay test entry follows the groups', () async {
-    await update(
-      _trayState(
-        groups: [_proxyGroup],
-        hotKeys: {
-          HotAction.delayTest: _bind(
-            HotAction.delayTest,
-            PhysicalKeyboardKey.keyD,
-          ),
-        },
-      ),
+  test('group submenus name their selection and check it', () async {
+    container.dispose();
+    container = ProviderContainer(
+      overrides: [selectedProxyNameProvider('Proxy').overrideWithValue('A')],
     );
+    await update(_trayState(groups: [_proxyGroup]));
 
-    final items = _items(showCall());
-    final index = items.indexWhere((item) => item['type'] == 'submenu');
-    expect(items[index + 1]['label'], HotAction.delayTest.label);
-    expect(items[index + 1]['detail'], '⌃⇧D');
+    final submenu = _item(showCall(), 'Proxy (A)');
+    expect(submenu, isNot(contains('detail')));
+    final children = (submenu['items'] as List).cast<Map<Object?, Object?>>();
+    expect(children.map((item) => item['checked']), [true, false, false]);
   });
 
   group('a platform that is not macOS', () {
@@ -408,17 +373,13 @@ void main() {
       expect((arguments['icon'] as Map)['isTemplate'], isFalse);
       expect(
         _items(showCall()).where((item) => item['type'] == 'submenu'),
-        isEmpty,
+        hasLength(1),
+        reason: 'only the mode submenu',
       );
       expect(
         _labels(showCall()),
-        isNot(contains(currentAppLocalizations.speedStatistics)),
+        isNot(contains(currentAppLocalizations.showSpeedStatistics)),
       );
-      expect(
-        _labels(showCall()),
-        isNot(contains(currentAppLocalizations.monochromeIcon)),
-      );
-      expect(_labels(showCall()), isNot(contains(HotAction.delayTest.label)));
     });
 
     test('joins modifiers with + in the hotkey hints', () async {
@@ -432,7 +393,7 @@ void main() {
       );
 
       expect(
-        _item(showCall(), currentAppLocalizations.show)['detail'],
+        _item(showCall(), currentAppLocalizations.dashboard)['detail'],
         'Ctrl+Shift+V',
       );
     });

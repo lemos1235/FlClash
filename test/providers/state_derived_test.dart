@@ -661,40 +661,6 @@ void main() {
     expect(container.read(delayProvider(proxyName: 'Selector')), 42);
   });
 
-  test('tray delays follow the listed groups and their test URLs', () {
-    const probeUrl = 'https://probe.example/204';
-    container
-        .read(groupsProvider.notifier)
-        .update(
-          (_) => const [
-            Group(
-              name: 'Selector',
-              type: GroupType.Selector,
-              hidden: false,
-              all: [
-                Proxy(name: 'Leaf', type: 'Direct'),
-                Proxy(name: 'Idle', type: 'Direct'),
-              ],
-            ),
-            Group(
-              name: 'Probe',
-              type: GroupType.URLTest,
-              hidden: false,
-              testUrl: probeUrl,
-              all: [Proxy(name: 'Leaf', type: 'Direct')],
-            ),
-          ],
-        );
-    container.read(delayDataSourceProvider.notifier)
-      ..setDelay(const Delay(name: 'Leaf', url: defaultTestUrl, value: 42))
-      ..setDelay(const Delay(name: 'Leaf', url: probeUrl, value: -1));
-
-    expect(container.read(trayDelaysProvider), {
-      'Selector': {'Leaf': 42},
-      'Probe': {'Leaf': -1},
-    });
-  });
-
   test('tray hotkeys leave out bindings that cannot fire', () {
     container.listen(trayStateProvider, (_, _) {});
     container

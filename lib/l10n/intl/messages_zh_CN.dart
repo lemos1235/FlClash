@@ -1082,6 +1082,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "启动后在这里显示策略组",
     ),
     "proxyGroupsCount": m71,
+    "proxyMode": MessageLookupByLibrary.simpleMessage("代理模式"),
     "proxyProviders": MessageLookupByLibrary.simpleMessage("代理集"),
     "proxyType": MessageLookupByLibrary.simpleMessage("代理类型"),
     "pruneCache": MessageLookupByLibrary.simpleMessage("修剪缓存"),
@@ -1319,6 +1320,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "serviceStatus": MessageLookupByLibrary.simpleMessage("服务状态"),
     "serviceUnavailable": MessageLookupByLibrary.simpleMessage("不可用"),
     "serviceUnsupportedRegion": MessageLookupByLibrary.simpleMessage("地区不支持"),
+    "setAsSystemProxy": MessageLookupByLibrary.simpleMessage("设为系统代理"),
     "settingEntries": MessageLookupByLibrary.simpleMessage("设置项"),
     "settings": MessageLookupByLibrary.simpleMessage("设置"),
     "settingsCount": m77,
@@ -1334,6 +1336,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "通知栏显示停止按钮",
     ),
     "showPassword": MessageLookupByLibrary.simpleMessage("显示密码"),
+    "showSpeedStatistics": MessageLookupByLibrary.simpleMessage("显示网速统计"),
     "sidebar": MessageLookupByLibrary.simpleMessage("侧边栏"),
     "sidebarBlurDesc": MessageLookupByLibrary.simpleMessage(
       "背景模糊会让侧边栏透出窗口后方的桌面。",

@@ -8,63 +8,77 @@ void main() {
     final linux = AppTray.forPlatform(isMacOS: false, isWindows: false);
 
     test('windows loads ico files from the windows directory', () {
-      expect(
-        windows.getTrayIcon(isStart: false, tunEnable: false, safeMode: false),
-        'assets/images/tray/windows/status_1.ico',
-      );
-      expect(
-        windows.getTrayIcon(isStart: true, tunEnable: false, safeMode: false),
-        'assets/images/tray/windows/status_2.ico',
-      );
-      expect(
-        windows.getTrayIcon(isStart: true, tunEnable: true, safeMode: false),
-        'assets/images/tray/windows/status_3.ico',
-      );
+      for (final (isStart, tunEnable, systemProxy, status) in [
+        (false, false, false, 1),
+        (true, false, false, 1),
+        (false, true, true, 1),
+        (true, false, true, 2),
+        (true, true, false, 3),
+      ]) {
+        expect(
+          windows.getTrayIcon(
+            isStart: isStart,
+            tunEnable: tunEnable,
+            systemProxy: systemProxy,
+            safeMode: false,
+          ),
+          'assets/images/tray/windows/status_$status.ico',
+        );
+      }
     });
 
     test('linux loads png files from the unix directory', () {
-      expect(
-        linux.getTrayIcon(isStart: false, tunEnable: false, safeMode: false),
-        'assets/images/tray/unix/status_1.png',
-      );
-      expect(
-        linux.getTrayIcon(isStart: true, tunEnable: false, safeMode: false),
-        'assets/images/tray/unix/status_2.png',
-      );
-      expect(
-        linux.getTrayIcon(isStart: true, tunEnable: true, safeMode: false),
-        'assets/images/tray/unix/status_3.png',
-      );
+      for (final (isStart, tunEnable, systemProxy, status) in [
+        (false, false, false, 1),
+        (true, false, false, 1),
+        (true, false, true, 2),
+        (true, true, false, 3),
+      ]) {
+        expect(
+          linux.getTrayIcon(
+            isStart: isStart,
+            tunEnable: tunEnable,
+            systemProxy: systemProxy,
+            safeMode: false,
+          ),
+          'assets/images/tray/unix/status_$status.png',
+        );
+      }
     });
 
-    test('macOS keeps the template icon in every state', () {
-      for (final (isStart, tunEnable) in [
-        (false, false),
-        (true, false),
-        (true, true),
+    test('macOS dims the template icon until TUN or system proxy routes', () {
+      for (final (isStart, tunEnable, systemProxy, status) in [
+        (false, false, false, 0),
+        (false, true, true, 0),
+        (true, false, false, 0),
+        (true, false, true, 1),
+        (true, true, false, 1),
       ]) {
         expect(
           macOS.getTrayIcon(
             isStart: isStart,
             tunEnable: tunEnable,
+            systemProxy: systemProxy,
             safeMode: false,
           ),
-          'assets/images/tray/macos/status_1.png',
+          'assets/images/tray/macos/status_$status.png',
         );
       }
     });
 
     test('macOS shows the color icons once monochrome is off', () {
-      for (final (isStart, tunEnable, safeMode, status) in [
-        (false, false, false, 1),
-        (true, false, false, 2),
-        (true, true, false, 3),
-        (true, true, true, 4),
+      for (final (isStart, tunEnable, systemProxy, safeMode, status) in [
+        (false, false, false, false, 1),
+        (true, false, false, false, 1),
+        (true, false, true, false, 2),
+        (true, true, false, false, 3),
+        (true, true, false, true, 4),
       ]) {
         expect(
           macOS.getTrayIcon(
             isStart: isStart,
             tunEnable: tunEnable,
+            systemProxy: systemProxy,
             safeMode: safeMode,
             monochrome: false,
           ),
@@ -83,6 +97,7 @@ void main() {
           windows.getTrayIcon(
             isStart: isStart,
             tunEnable: tunEnable,
+            systemProxy: false,
             safeMode: true,
           ),
           'assets/images/tray/windows/status_4.ico',
@@ -91,6 +106,7 @@ void main() {
           linux.getTrayIcon(
             isStart: isStart,
             tunEnable: tunEnable,
+            systemProxy: false,
             safeMode: true,
           ),
           'assets/images/tray/unix/status_4.png',
@@ -99,6 +115,7 @@ void main() {
           macOS.getTrayIcon(
             isStart: isStart,
             tunEnable: tunEnable,
+            systemProxy: false,
             safeMode: true,
           ),
           'assets/images/tray/macos/status_4.png',

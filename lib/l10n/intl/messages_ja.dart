@@ -1183,6 +1183,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "起動するとここにグループが表示されます",
     ),
     "proxyGroupsCount": m71,
+    "proxyMode": MessageLookupByLibrary.simpleMessage("プロキシモード"),
     "proxyProviders": MessageLookupByLibrary.simpleMessage("プロキシプロバイダー"),
     "proxyType": MessageLookupByLibrary.simpleMessage("プロキシタイプ"),
     "pruneCache": MessageLookupByLibrary.simpleMessage("キャッシュを整理"),
@@ -1454,6 +1455,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "serviceStatus": MessageLookupByLibrary.simpleMessage("サービスの状態"),
     "serviceUnavailable": MessageLookupByLibrary.simpleMessage("利用不可"),
     "serviceUnsupportedRegion": MessageLookupByLibrary.simpleMessage("対象外の地域"),
+    "setAsSystemProxy": MessageLookupByLibrary.simpleMessage("システムプロキシに設定"),
     "settingEntries": MessageLookupByLibrary.simpleMessage("設定項目"),
     "settings": MessageLookupByLibrary.simpleMessage("設定"),
     "settingsCount": m77,
@@ -1471,6 +1473,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "通知に停止ボタンを表示",
     ),
     "showPassword": MessageLookupByLibrary.simpleMessage("パスワードを表示"),
+    "showSpeedStatistics": MessageLookupByLibrary.simpleMessage("速度統計を表示"),
     "sidebar": MessageLookupByLibrary.simpleMessage("サイドバー"),
     "sidebarBlurDesc": MessageLookupByLibrary.simpleMessage(
       "背景のぼかしでは、ウィンドウの背後のデスクトップがサイドバー越しに見えます。",

@@ -181,63 +181,6 @@ final class TrayStateProvider
 
 String _$trayStateHash() => r'd4fe17e62e479ff316ab5deb11475b4ea533d0bb';
 
-/// Measured delays of the proxies the tray lists, by group and then proxy
-/// name. Resolved like a proxy card, so a nested group shows its selection.
-
-@ProviderFor(trayDelays)
-final trayDelaysProvider = TrayDelaysProvider._();
-
-/// Measured delays of the proxies the tray lists, by group and then proxy
-/// name. Resolved like a proxy card, so a nested group shows its selection.
-
-final class TrayDelaysProvider
-    extends
-        $FunctionalProvider<
-          Map<String, Map<String, int>>,
-          Map<String, Map<String, int>>,
-          Map<String, Map<String, int>>
-        >
-    with $Provider<Map<String, Map<String, int>>> {
-  /// Measured delays of the proxies the tray lists, by group and then proxy
-  /// name. Resolved like a proxy card, so a nested group shows its selection.
-  TrayDelaysProvider._()
-    : super(
-        from: null,
-        argument: null,
-        retry: null,
-        name: r'trayDelaysProvider',
-        isAutoDispose: true,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
-
-  @override
-  String debugGetCreateSourceHash() => _$trayDelaysHash();
-
-  @$internal
-  @override
-  $ProviderElement<Map<String, Map<String, int>>> $createElement(
-    $ProviderPointer pointer,
-  ) => $ProviderElement(pointer);
-
-  @override
-  Map<String, Map<String, int>> create(Ref ref) {
-    return trayDelays(ref);
-  }
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(Map<String, Map<String, int>> value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<Map<String, Map<String, int>>>(
-        value,
-      ),
-    );
-  }
-}
-
-String _$trayDelaysHash() => r'e0c9bc51a20c911d9b4cbb6ee667f38e9b9218d5';
-
 @ProviderFor(trayTitleState)
 final trayTitleStateProvider = TrayTitleStateProvider._();
 

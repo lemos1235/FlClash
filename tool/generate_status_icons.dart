@@ -9,8 +9,9 @@ const icoOutputDir = 'assets/images/tray/windows';
 const macosOutputDir = 'assets/images/tray/macos';
 const statusIconNames = ['status_1', 'status_2', 'status_3', 'status_4'];
 const macosStatusIconSources = {
-  'status_1': '$sourceDir/glyph.svg',
-  'status_4': '$sourceDir/status_4.svg',
+  'status_0': ('$sourceDir/glyph.svg', 0.45),
+  'status_1': ('$sourceDir/glyph.svg', 1.0),
+  'status_4': ('$sourceDir/status_4.svg', 1.0),
 };
 const trayBaseSize = 18;
 const trayScales = [1, 2, 3, 4];
@@ -46,7 +47,7 @@ Future<void> main() async {
         sizes: trayIcoSizes,
       );
     }
-    for (final MapEntry(key: name, value: path)
+    for (final MapEntry(key: name, value: (path, opacity))
         in macosStatusIconSources.entries) {
       final source = File(path);
       if (!source.existsSync()) {
@@ -56,7 +57,7 @@ Future<void> main() async {
       }
       await _writeTrayVariants(
         renderer,
-        await renderer.monochrome(source),
+        await renderer.monochrome(source, opacity: opacity),
         name,
         macosOutputDir,
       );
@@ -152,13 +153,14 @@ class _Renderer {
     return wrapper;
   }
 
-  Future<File> monochrome(File source) async {
-    final copy = File('${tempDir.path}/mono-${_basename(source)}');
+  Future<File> monochrome(File source, {double opacity = 1}) async {
+    final copy = File('${tempDir.path}/mono-$opacity-${_basename(source)}');
+    final svg = (await source.readAsString()).replaceAllMapped(
+      RegExp(r'\b(fill|stroke)="(?!none")[^"]*"'),
+      (match) => '${match[1]}="#000000"',
+    );
     await copy.writeAsString(
-      (await source.readAsString()).replaceAllMapped(
-        RegExp(r'\b(fill|stroke)="(?!none")[^"]*"'),
-        (match) => '${match[1]}="#000000"',
-      ),
+      opacity == 1 ? svg : svg.replaceFirst('<svg', '<svg opacity="$opacity"'),
     );
     return copy;
   }

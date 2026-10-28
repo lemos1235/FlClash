@@ -995,9 +995,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "inputRuleContent": MessageLookupByLibrary.simpleMessage(
       "Введите содержимое правила",
     ),
-    "installedAppsPermissionDeniedMessage": MessageLookupByLibrary.simpleMessage(
-      "Разрешение на список приложений отклонено, поэтому установленные приложения недоступны. Предоставьте его вручную в системных настройках.",
-    ),
+    "installedAppsPermissionDeniedMessage":
+        MessageLookupByLibrary.simpleMessage(
+          "Разрешение на список приложений отклонено, поэтому установленные приложения недоступны. Предоставьте его вручную в системных настройках.",
+        ),
     "installedAppsPermissionDesc": MessageLookupByLibrary.simpleMessage(
       "Эта система не выдаёт список установленных приложений без разрешения. Предоставьте его, чтобы настроить прокси для отдельных приложений.",
     ),
@@ -1442,6 +1443,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Группы появятся здесь после запуска ядра",
     ),
     "proxyGroupsCount": m71,
+    "proxyMode": MessageLookupByLibrary.simpleMessage("Режим прокси"),
     "proxyProviders": MessageLookupByLibrary.simpleMessage("Провайдеры прокси"),
     "proxyType": MessageLookupByLibrary.simpleMessage("Тип прокси"),
     "pruneCache": MessageLookupByLibrary.simpleMessage("Очистить кэш"),
@@ -1773,6 +1775,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "serviceUnsupportedRegion": MessageLookupByLibrary.simpleMessage(
       "Регион не поддерживается",
     ),
+    "setAsSystemProxy": MessageLookupByLibrary.simpleMessage(
+      "Сделать системным прокси",
+    ),
     "settingEntries": MessageLookupByLibrary.simpleMessage("параметры"),
     "settings": MessageLookupByLibrary.simpleMessage("Настройки"),
     "settingsCount": m77,
@@ -1790,6 +1795,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Кнопка остановки в уведомлении",
     ),
     "showPassword": MessageLookupByLibrary.simpleMessage("Показать пароль"),
+    "showSpeedStatistics": MessageLookupByLibrary.simpleMessage(
+      "Показывать статистику скорости",
+    ),
     "sidebar": MessageLookupByLibrary.simpleMessage("Боковая панель"),
     "sidebarBlurDesc": MessageLookupByLibrary.simpleMessage(
       "Размытие фона показывает рабочий стол за окном сквозь боковую панель.",

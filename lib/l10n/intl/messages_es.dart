@@ -1028,9 +1028,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "inputRuleContent": MessageLookupByLibrary.simpleMessage(
       "Introduce el contenido de la regla",
     ),
-    "installedAppsPermissionDeniedMessage": MessageLookupByLibrary.simpleMessage(
-      "Se denegó el permiso de lista de apps, por lo que no se pueden mostrar las apps instaladas. Concédelo manualmente en los ajustes del sistema.",
-    ),
+    "installedAppsPermissionDeniedMessage":
+        MessageLookupByLibrary.simpleMessage(
+          "Se denegó el permiso de lista de apps, por lo que no se pueden mostrar las apps instaladas. Concédelo manualmente en los ajustes del sistema.",
+        ),
     "installedAppsPermissionDesc": MessageLookupByLibrary.simpleMessage(
       "Este sistema oculta la lista de apps instaladas hasta que se concede el permiso. Autorízalo para configurar el proxy por app.",
     ),
@@ -1489,6 +1490,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Los grupos aparecen aquí cuando se inicia el núcleo",
     ),
     "proxyGroupsCount": m71,
+    "proxyMode": MessageLookupByLibrary.simpleMessage("Modo de proxy"),
     "proxyProviders": MessageLookupByLibrary.simpleMessage(
       "Proveedores de proxies",
     ),
@@ -1832,6 +1834,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "serviceUnsupportedRegion": MessageLookupByLibrary.simpleMessage(
       "Región no compatible",
     ),
+    "setAsSystemProxy": MessageLookupByLibrary.simpleMessage(
+      "Establecer como proxy del sistema",
+    ),
     "settingEntries": MessageLookupByLibrary.simpleMessage("ajustes"),
     "settings": MessageLookupByLibrary.simpleMessage("Ajustes"),
     "settingsCount": m77,
@@ -1849,6 +1854,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Botón de detener en la notificación",
     ),
     "showPassword": MessageLookupByLibrary.simpleMessage("Mostrar contraseña"),
+    "showSpeedStatistics": MessageLookupByLibrary.simpleMessage(
+      "Mostrar estadísticas de velocidad",
+    ),
     "sidebar": MessageLookupByLibrary.simpleMessage("Barra lateral"),
     "sidebarBlurDesc": MessageLookupByLibrary.simpleMessage(
       "El desenfoque de fondo deja ver el escritorio detrás de la ventana a través de la barra lateral.",

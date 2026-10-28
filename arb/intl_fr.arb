@@ -963,5 +963,8 @@
   "preferred": "Préféré",
   "addToLocalProxies": "Ajouter aux proxys locaux",
   "addedToLocalProxies": "{name} ajouté aux proxys locaux",
-  "alreadyInLocalProxies": "{name} est déjà dans les proxys locaux"
+  "alreadyInLocalProxies": "{name} est déjà dans les proxys locaux",
+  "proxyMode": "Mode proxy",
+  "setAsSystemProxy": "Définir comme proxy système",
+  "showSpeedStatistics": "Afficher les statistiques de vitesse"
 }

@@ -1164,6 +1164,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "코어가 시작되면 그룹이 여기에 표시됩니다",
     ),
     "proxyGroupsCount": m71,
+    "proxyMode": MessageLookupByLibrary.simpleMessage("프록시 모드"),
     "proxyProviders": MessageLookupByLibrary.simpleMessage("프록시 공급자"),
     "proxyType": MessageLookupByLibrary.simpleMessage("프록시 유형"),
     "pruneCache": MessageLookupByLibrary.simpleMessage("캐시 정리"),
@@ -1425,6 +1426,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "serviceUnsupportedRegion": MessageLookupByLibrary.simpleMessage(
       "지원하지 않는 지역",
     ),
+    "setAsSystemProxy": MessageLookupByLibrary.simpleMessage("시스템 프록시로 설정"),
     "settingEntries": MessageLookupByLibrary.simpleMessage("설정"),
     "settings": MessageLookupByLibrary.simpleMessage("설정"),
     "settingsCount": m77,
@@ -1442,6 +1444,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "알림에 중지 버튼 표시",
     ),
     "showPassword": MessageLookupByLibrary.simpleMessage("비밀번호 표시"),
+    "showSpeedStatistics": MessageLookupByLibrary.simpleMessage("속도 통계 표시"),
     "sidebar": MessageLookupByLibrary.simpleMessage("사이드바"),
     "sidebarBlurDesc": MessageLookupByLibrary.simpleMessage(
       "배경 흐림은 창 뒤의 바탕화면을 사이드바에 비쳐 보이게 합니다.",

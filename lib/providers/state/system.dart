@@ -94,43 +94,6 @@ Map<HotAction, HotKeyAction> _trayHotKeys(Ref ref) {
   };
 }
 
-/// Measured delays of the proxies the tray lists, by group and then proxy
-/// name. Resolved like a proxy card, so a nested group shows its selection.
-@riverpod
-Map<String, Map<String, int>> trayDelays(Ref ref) {
-  final delayMap = ref.watch(delayDataSourceProvider);
-  if (delayMap.isEmpty) {
-    return const {};
-  }
-  final groups = ref.watch(currentGroupsStateProvider).value;
-  final allGroups = ref.watch(groupsProvider);
-  final selectedMap = ref.watch(selectedMapProvider);
-  final defaultTestUrl = ref.watch(
-    patchClashConfigProvider.select((state) => state.testUrl),
-  );
-  final delays = <String, Map<String, int>>{};
-  for (final group in groups) {
-    final testUrl = group.testUrl.takeFirstValid([defaultTestUrl]);
-    final groupDelays = <String, int>{};
-    for (final proxy in group.all) {
-      final delay = computeProxyDelayState(
-        proxyName: proxy.name,
-        testUrl: testUrl,
-        groups: allGroups,
-        selectedMap: selectedMap,
-        delayMap: delayMap,
-      ).delay;
-      if (delay != 0) {
-        groupDelays[proxy.name] = delay;
-      }
-    }
-    if (groupDelays.isNotEmpty) {
-      delays[group.name] = groupDelays;
-    }
-  }
-  return delays;
-}
-
 @riverpod
 TrayTitleState trayTitleState(Ref ref) {
   final showTrayTitle = ref.watch(

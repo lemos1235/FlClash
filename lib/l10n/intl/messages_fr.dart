@@ -1027,9 +1027,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "inputRuleContent": MessageLookupByLibrary.simpleMessage(
       "Saisissez le contenu de la règle",
     ),
-    "installedAppsPermissionDeniedMessage": MessageLookupByLibrary.simpleMessage(
-      "L’autorisation de la liste des apps a été refusée ; les apps installées ne peuvent donc pas être listées. Veuillez l’accorder manuellement dans les réglages du système.",
-    ),
+    "installedAppsPermissionDeniedMessage":
+        MessageLookupByLibrary.simpleMessage(
+          "L’autorisation de la liste des apps a été refusée ; les apps installées ne peuvent donc pas être listées. Veuillez l’accorder manuellement dans les réglages du système.",
+        ),
     "installedAppsPermissionDesc": MessageLookupByLibrary.simpleMessage(
       "Ce système masque la liste des apps installées tant que l’autorisation n’est pas accordée. Accordez-la pour configurer le proxy par app.",
     ),
@@ -1490,6 +1491,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Les groupes s’affichent ici une fois le cœur démarré",
     ),
     "proxyGroupsCount": m71,
+    "proxyMode": MessageLookupByLibrary.simpleMessage("Mode proxy"),
     "proxyProviders": MessageLookupByLibrary.simpleMessage(
       "Fournisseurs de proxys",
     ),
@@ -1829,6 +1831,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "serviceUnsupportedRegion": MessageLookupByLibrary.simpleMessage(
       "Région non prise en charge",
     ),
+    "setAsSystemProxy": MessageLookupByLibrary.simpleMessage(
+      "Définir comme proxy système",
+    ),
     "settingEntries": MessageLookupByLibrary.simpleMessage("réglages"),
     "settings": MessageLookupByLibrary.simpleMessage("Paramètres"),
     "settingsCount": m77,
@@ -1847,6 +1852,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "showPassword": MessageLookupByLibrary.simpleMessage(
       "Afficher le mot de passe",
+    ),
+    "showSpeedStatistics": MessageLookupByLibrary.simpleMessage(
+      "Afficher les statistiques de vitesse",
     ),
     "sidebar": MessageLookupByLibrary.simpleMessage("Barre latérale"),
     "sidebarBlurDesc": MessageLookupByLibrary.simpleMessage(
